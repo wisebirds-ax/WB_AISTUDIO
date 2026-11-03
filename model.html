@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MODEL | WISEBIRDS AI STUDIO</title>
+  <meta name="description" content="WISEBIRDS AI STUDIO — AI 모델 에이전시">
+  <link rel="preload" href="fonts/A2Z-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-detail">
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="WISEBIRDS AI STUDIO 메인으로">
+      <span class="logo-light">WISEBIRDS</span> <span class="logo-strong">AI STUDIO</span>
+    </a>
+    <nav class="gnb" aria-label="주요 메뉴">
+      <a href="makeup.html" data-nav="makeup">MAKE<b>UP</b></a>
+      <a href="index.html#model" data-nav="model" class="is-active">MODEL</a>
+      <a href="contact.html" data-nav="contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <main class="detail">
+    <a id="backBtn" class="back-btn" href="index.html#model">
+      <svg viewBox="0 0 6 10" aria-hidden="true"><path d="M5 1L1 5l4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg>BACK
+    </a>
+    <h1 id="modelTitle" class="detail-title"></h1>
+    <div id="gallery" class="gallery" tabindex="0" aria-label="모델 이미지 (좌우로 넘겨보기)">
+      <ul id="galleryTrack" class="gallery-track"></ul>
+    </div>
+  </main>
+
+  <footer class="detail-info">
+    <div id="modelInfo" class="info-list"></div>
+    <button type="button" id="shareBtn" class="share-btn" aria-haspopup="dialog">SHARE</button>
+  </footer>
+
+  <!-- SHARE 팝업: 디자인 확정 후 이 블록과 css의 .modal 부분만 교체하면 됩니다 -->
+  <div id="shareModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="shareTitle" hidden>
+    <div class="modal-box">
+      <button type="button" class="modal-close" aria-label="닫기">×</button>
+      <p id="shareTitle" class="modal-title">SHARE</p>
+      <ul class="modal-links">
+        <li><a data-sns="instagram" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a data-sns="facebook" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a data-sns="tiktok" target="_blank" rel="noopener">TikTok</a></li>
+        <li><button type="button" data-copy>페이지 링크 복사</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="data/models.js"></script>
+  <script src="js/data-loader.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/model.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>WISEBIRDS AI STUDIO</title>
+  <meta name="description" content="WISEBIRDS AI STUDIO — AI 모델 에이전시">
+  <link rel="preload" href="fonts/A2Z-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-main">
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="WISEBIRDS AI STUDIO 메인으로">
+      <span class="logo-light">WISEBIRDS</span> <span class="logo-strong">AI STUDIO</span>
+    </a>
+    <nav class="gnb" aria-label="주요 메뉴">
+      <a href="makeup.html" data-nav="makeup">MAKE<b>UP</b></a>
+      <a href="#model" data-nav="model">MODEL</a>
+      <a href="contact.html" data-nav="contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 01. 메인 영상 -->
+    <section class="hero" aria-label="메인 영상">
+      <div class="hero-frame">
+        <video id="heroVideo" class="hero-video is-empty" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
+      </div>
+      <button type="button" class="scroll-cue" aria-label="모델 목록으로 이동">
+        <span>SCROLL</span>
+        <svg viewBox="0 0 24 10" aria-hidden="true"><path d="M1 1l11 8 11-8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+      </button>
+    </section>
+
+    <!-- 02. 모델 리스트 -->
+    <section id="model" class="models" aria-label="모델">
+      <div id="filters" class="filters"></div>
+      <ul id="modelGrid" class="model-grid"></ul>
+    </section>
+  </main>
+
+  <button type="button" class="top-btn" aria-label="맨 위로">TOP</button>
+
+  <script src="js/config.js"></script>
+  <script src="data/models.js"></script>
+  <script src="js/data-loader.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

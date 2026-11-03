@@ -1,0 +1,4 @@
+A2Z (에이투지체)
+Designer: Lee Juim (Freesentation) — https://freesentation.blog/a2z
+License: SIL Open Font License 1.1 (상업적 사용·웹 임베딩 가능, 폰트 파일 단독 판매 금지)
+Source: https://github.com/Freesentation/A2Z (v1.001 woff2)

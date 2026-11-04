@@ -235,6 +235,54 @@ body.modal-open { overflow: hidden; }
 .placeholder p { margin: 0; }
 .placeholder a { color: var(--c-ink); text-decoration: underline; }
 
+/* ---------- CONTACT ---------- */
+.contact {
+  padding: calc(var(--header-h) + clamp(48px, 6vw, 150px) + env(safe-area-inset-top, 0px)) var(--pad-x) clamp(80px, 8vw, 200px);
+}
+.contact-title {
+  margin: 0 0 clamp(48px, 4.5vw, 110px);
+  font-size: clamp(24px, 1.85vw, 48px); font-weight: 700; line-height: 1.1;
+  color: var(--c-ink); letter-spacing: -0.01em;
+}
+.contact-form { max-width: 640px; display: grid; gap: clamp(22px, 1.6vw, 36px); }
+.field { display: grid; grid-template-columns: clamp(110px, 7vw, 160px) 1fr; align-items: end; column-gap: 16px; }
+.field label {
+  padding-bottom: 9px;
+  font-size: clamp(13px, .86vw, 18px); font-weight: 700; color: var(--c-ink); letter-spacing: .01em;
+}
+.field input, .field textarea {
+  width: 100%; padding: 8px 0; margin: 0;
+  font: inherit; font-size: clamp(14px, .86vw, 18px); font-weight: 300; color: var(--c-ink);
+  background: transparent; border: 0; border-bottom: 1px solid #cfcfcf; border-radius: 0;
+  outline: none; transition: border-color .2s;
+  -webkit-appearance: none; appearance: none;
+}
+.field input:focus, .field textarea:focus { border-bottom-color: var(--c-ink); }
+.field-message { grid-template-columns: 1fr; row-gap: 6px; margin-top: 10px; }
+.field-message label { padding-bottom: 0; }
+.field-message textarea { min-height: 150px; resize: vertical; line-height: 1.6; }
+.field.is-invalid input, .field.is-invalid textarea { border-bottom-color: #c4302b; }
+
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+.agree {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 12px; line-height: 1.6; color: var(--c-mute); cursor: pointer;
+}
+.agree input { margin: 3px 0 0; accent-color: #000; flex: none; }
+.agree.is-invalid span { color: #c4302b; }
+
+.send-btn {
+  justify-self: start; margin-top: 8px;
+  font-size: clamp(14px, .94vw, 20px); font-weight: 700; letter-spacing: .04em; color: var(--c-ink);
+  padding: 6px 0; border-bottom: 1px solid transparent; transition: border-color .2s, opacity .2s;
+}
+.send-btn:hover { border-bottom-color: var(--c-ink); }
+.send-btn:disabled { opacity: .4; cursor: default; }
+.form-status { margin: 0; min-height: 1.6em; font-size: 13px; color: var(--c-text); }
+.form-status.is-error { color: #c4302b; }
+.form-status.is-done { color: var(--c-ink); }
+
 /* ---------- 반응형 ---------- */
 @media (max-width: 1200px) {
   .model-grid { grid-template-columns: repeat(4, 1fr); }
@@ -254,6 +302,9 @@ body.modal-open { overflow: hidden; }
   }
 
   .filter-row { grid-template-columns: 56px 1fr; }
+  .contact { padding-top: calc(var(--header-h) + 40px + env(safe-area-inset-top, 0px)); }
+  .field { grid-template-columns: 1fr; row-gap: 2px; }
+  .field label { padding-bottom: 0; }
   .model-grid { grid-template-columns: repeat(2, 1fr); column-gap: 10px; }
 
   /* 상세: 이름 위, 이미지 아래 가로 스와이프 */
@@ -264,9 +315,13 @@ body.modal-open { overflow: hidden; }
   }
   .back-btn { position: static; transform: none; width: auto; justify-content: flex-start; padding: 0 var(--pad-x) 16px; }
   .detail-title { position: static; width: auto; padding: 0 var(--pad-x) 20px; text-align: left; font-size: 26px; }
-  .gallery { position: static; flex: 1; min-height: 0; padding-left: var(--pad-x); cursor: auto; }
+  .gallery { position: static; flex: 1; min-height: 0; padding-left: var(--pad-x); cursor: auto; overscroll-behavior: contain; }
   .gallery-track { height: 100%; align-items: flex-start; }
-  .gallery-item { height: min(100%, 115vw); }
+  .gallery-item {
+    height: var(--item-h, min(100%, 115vw));
+    width: calc(var(--item-h, 60svh) * 522 / 769);
+    aspect-ratio: auto;
+  }
   .detail-info {
     left: 0; right: 0; bottom: 0;
     padding: 14px var(--pad-x) calc(14px + env(safe-area-inset-bottom, 0px));

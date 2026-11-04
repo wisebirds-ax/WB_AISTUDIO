@@ -34,6 +34,7 @@
       ${field('AGE', m.age)}${field('HEIGHT', m.height)}${field('HAIR', m.hairColor)}${field('EYES', m.eyes)}`;
 
     setupShare(m);
+    requestAnimationFrame(fit);
   });
 
   /* BACK: 리스트에서 들어왔으면 뒤로가기(스크롤·필터 유지), 아니면 리스트로 이동 */
@@ -49,7 +50,31 @@
 
   /* ---------- 가로 갤러리: 휠 → 가로 이동, 마우스 드래그, 관성 ---------- */
   let target = 0, current = 0, raf = null;
-  const max = () => gallery.scrollWidth - gallery.clientWidth;
+  /* 끝 위치 = 마지막 이미지 오른쪽 끝 + 끝 여백 (그 이상은 스크롤되지 않음) */
+  const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+  const max = () => {
+    const items = track.children;
+    if (!items.length) return 0;
+    const last = items[items.length - 1].getBoundingClientRect();
+    const endPad = parseFloat(getComputedStyle(track).paddingRight) || 0;
+    const end = last.right - gallery.getBoundingClientRect().left + gallery.scrollLeft + endPad - gallery.clientWidth;
+    return Math.max(0, Math.min(gallery.scrollWidth - gallery.clientWidth, Math.round(end)));
+  };
+
+  /* 모바일: 이미지 크기를 화면 높이에 맞춰 px 로 고정 (브라우저마다 계산이 달라 생기는 빈 여백 방지) */
+  function fit() {
+    if (isMobile()) {
+      const h = Math.floor(Math.min(gallery.clientHeight, window.innerWidth * 1.15));
+      track.style.setProperty('--item-h', h + 'px');
+    } else {
+      track.style.removeProperty('--item-h');
+    }
+    current = target = Math.max(0, Math.min(max(), gallery.scrollLeft));
+    gallery.scrollLeft = current;
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', () => setTimeout(fit, 200));
+  track.addEventListener('load', fit, true);            // 이미지가 로드될 때마다 다시 맞춤
   const clamp = v => Math.max(0, Math.min(max(), v));
   function tick() {
     current += (target - current) * (reduce ? 1 : 0.12);

@@ -45,5 +45,9 @@ window.SITE_CONFIG = {
       // { key: 'youtube',   label: 'YOUTUBE',   url: 'https://www.youtube.com/' },
     ],
     copy: { show: true, label: 'LINK', done: 'COPIED' }   // 페이지 링크 복사 버튼
-  }
+  },
+
+  /* 6) CONTACT 문의 — Google Apps Script 웹앱 주소 (설정 방법: README 'CONTACT 연결')
+       비워두면 SEND 를 눌러도 전송되지 않고 안내 문구만 표시됩니다. */
+  CONTACT_ENDPOINT: 'https://script.google.com/macros/s/AKfycby3J66p80kQPsdtRqtIw9ANYOno-1Xiofme76BgxrNdSicf7nyvckYkA2kuSc3jYz7LkA/exec'
 };

@@ -53,11 +53,7 @@
       tags: { hair: upperList(raw.hair), body: upperList(raw.body), mood: upperList(raw.mood) },
       thumb: resolvePath(id, raw.thumb || 'thumb.jpg'),
       images: images.length ? images : [resolvePath(id, raw.thumb || 'thumb.jpg')],
-      sns: {
-        instagram: raw.instagram || '',
-        facebook: raw.facebook || '',
-        tiktok: raw.tiktok || ''
-      }
+      raw    // 시트의 모든 열 (SHARE 모델별 주소 등에 사용)
     };
   }
 

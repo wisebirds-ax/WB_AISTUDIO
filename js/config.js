@@ -32,10 +32,18 @@ window.SITE_CONFIG = {
     { key: 'mood', label: 'MOOD', options: ['CUTE', 'LIVELY', 'PURE', 'FEMININE', 'SEXY', 'CHIC', 'BOYISH'] }
   ],
 
-  /* 5) SHARE 팝업 기본 링크 — 모델별 SNS가 시트에 없으면 이 주소를 사용합니다. */
-  SNS: {
-    instagram: 'https://www.instagram.com/',
-    facebook:  'https://www.facebook.com/',
-    tiktok:    'https://www.tiktok.com/'
+  /* 5) SHARE 팝업 — 위에서 아래 순서대로 버튼이 나열됩니다.
+       ─ SNS 추가: { key, label, url } 한 줄 추가  (예: 페이스북 줄의 // 를 지우면 바로 표시)
+       ─ SNS 빼기: 해당 줄 삭제 또는 맨 앞에 // 붙이기
+       ─ url  : 기본 주소. 비워두면 모델별 주소가 있을 때만 표시
+       ─ 모델별 주소: 구글 시트에 key 와 같은 이름의 열(instagram, tiktok …)을 만들고 주소 입력 */
+  SHARE: {
+    links: [
+      { key: 'instagram', label: 'INSTAGRAM', url: 'https://www.instagram.com/' },
+      { key: 'tiktok',    label: 'TIKTOK',    url: 'https://www.tiktok.com/' },
+      // { key: 'facebook',  label: 'FACEBOOK',  url: 'https://www.facebook.com/' },
+      // { key: 'youtube',   label: 'YOUTUBE',   url: 'https://www.youtube.com/' },
+    ],
+    copy: { show: true, label: 'LINK', done: 'COPIED' }   // 페이지 링크 복사 버튼
   }
 };

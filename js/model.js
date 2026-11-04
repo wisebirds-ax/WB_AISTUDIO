@@ -110,21 +110,28 @@
   function setupShare(m) {
     const modal = document.getElementById('shareModal');
     const openBtn = document.getElementById('shareBtn');
-    const links = {
-      instagram: m.sns.instagram || CFG.SNS.instagram,
-      facebook: m.sns.facebook || CFG.SNS.facebook,
-      tiktok: m.sns.tiktok || CFG.SNS.tiktok
-    };
-    modal.querySelectorAll('[data-sns]').forEach(a => {
-      const url = links[a.dataset.sns];
-      if (url) a.href = url; else a.hidden = true;
-    });
-    const copyBtn = modal.querySelector('[data-copy]');
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(location.href)
-        .then(() => (copyBtn.textContent = '링크가 복사되었습니다'))
-        .catch(() => (copyBtn.textContent = '복사하지 못했습니다'));
-      setTimeout(() => (copyBtn.textContent = '페이지 링크 복사'), 2000);
+    const list = document.getElementById('shareLinks');
+    const S = CFG.SHARE || { links: [], copy: { show: true, label: 'LINK', done: 'COPIED' } };
+
+    /* SNS 목록은 config.js 의 SHARE.links 에서 만들어집니다 (모델별 주소가 있으면 우선) */
+    const items = S.links
+      .map(l => ({ label: l.label, url: String((m.raw && m.raw[l.key]) || l.url || '').trim() }))
+      .filter(l => l.url)
+      .map(l => `<li><a href="${escapeHTML(l.url)}" target="_blank" rel="noopener">${escapeHTML(l.label)}</a></li>`);
+    if (S.copy && S.copy.show !== false) items.push(`<li><button type="button" data-copy>${escapeHTML(S.copy.label)}</button></li>`);
+    list.innerHTML = items.join('');
+
+    const copyBtn = list.querySelector('[data-copy]');
+    if (copyBtn) copyBtn.addEventListener('click', () => {
+      const done = () => { copyBtn.textContent = S.copy.done || 'COPIED'; copyBtn.classList.add('is-done'); };
+      (navigator.clipboard ? navigator.clipboard.writeText(location.href) : Promise.reject())
+        .then(done)
+        .catch(() => {                       // 구형 브라우저 대체
+          const t = document.createElement('textarea'); t.value = location.href; document.body.appendChild(t);
+          t.select(); try { document.execCommand('copy'); done(); } catch (e) {} t.remove();
+        });
+      clearTimeout(copyBtn._t);
+      copyBtn._t = setTimeout(() => { copyBtn.textContent = S.copy.label; copyBtn.classList.remove('is-done'); }, 1800);
     });
 
     const open = () => { modal.hidden = false; document.body.classList.add('modal-open'); modal.querySelector('.modal-close').focus(); };
@@ -133,4 +140,5 @@
     modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('.modal-close')) close(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
   }
+
 })();

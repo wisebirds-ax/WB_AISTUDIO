@@ -25,10 +25,10 @@ window.SITE_CONFIG = {
   },
 
   /* 4) 필터 항목 — 버튼을 추가/삭제하려면 여기만 고치면 됩니다.
-       key 는 시트의 열 이름(hair / body / mood)과 같아야 합니다. */
+       key 는 시트의 열 이름(gender / hair / mood)과 같아야 합니다. */
   FILTERS: [
+    { key: 'gender', label: 'MODEL', options: ['MEN', 'WOMEN'] },
     { key: 'hair', label: 'HAIR', options: ['LONG', 'MEDIUM', 'SHORT'] },
-    { key: 'body', label: 'BODY', options: ['SLIM', 'MEDIUM', 'CURVY'] },
     { key: 'mood', label: 'MOOD', options: ['CUTE', 'LIVELY', 'PURE', 'FEMININE', 'SEXY', 'CHIC', 'BOYISH'] }
   ],
 

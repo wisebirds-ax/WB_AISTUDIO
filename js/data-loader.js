@@ -29,7 +29,10 @@
   }
 
   const list = v => String(v || '').split(/[,|]/).map(s => s.trim()).filter(Boolean);
-  const upperList = v => list(v).map(s => s.toUpperCase());
+  /* 성별은 한글·약어로 적어도 인식 (남/남자/M/MALE → MEN, 여/여자/F/FEMALE → WOMEN) */
+  const GENDER = { '남': 'MEN', '남자': 'MEN', '남성': 'MEN', 'M': 'MEN', 'MAN': 'MEN', 'MALE': 'MEN',
+                   '여': 'WOMEN', '여자': 'WOMEN', '여성': 'WOMEN', 'F': 'WOMEN', 'W': 'WOMEN', 'WOMAN': 'WOMEN', 'FEMALE': 'WOMEN' };
+  const upperList = v => list(v).map(s => s.toUpperCase()).map(s => GENDER[s] || s);
 
   function resolvePath(id, file) {
     if (!file) return '';
@@ -50,7 +53,7 @@
       height: raw.height ?? '',
       hairColor: String(raw.hair_color || '').trim(),
       eyes: String(raw.eyes || '').trim(),
-      tags: { hair: upperList(raw.hair), body: upperList(raw.body), mood: upperList(raw.mood) },
+      tags: Object.fromEntries(CFG.FILTERS.map(f => [f.key, upperList(raw[f.key])])),
       thumb: resolvePath(id, raw.thumb || 'thumb.jpg'),
       images: images.length ? images : [resolvePath(id, raw.thumb || 'thumb.jpg')],
       raw    // 시트의 모든 열 (SHARE 모델별 주소 등에 사용)

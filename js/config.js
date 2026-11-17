@@ -7,9 +7,9 @@ window.SITE_CONFIG = {
   /* 1) 모델 데이터 출처
      ─ 비워두면('')  data/models.js 파일을 사용합니다.
      ─ 구글 시트 주소를 넣으면 시트 내용이 우선 적용됩니다.
-       (시트 > 파일 > 공유 > 웹에 게시 > 'CSV' 로 게시한 주소)
-       예: 'https://docs.google.com/spreadsheets/d/e/XXXX/pub?gid=0&single=true&output=csv'  */
-  SHEET_CSV_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeIctvjE5H00vMwwmVHGol1ve_8cWXFyr5ZIjzmoeehkekgZmII0rYYUwC-jp43wmmIaYhbavr5m75/pub?gid=901689558&single=true&output=csv',
+       형식: https://docs.google.com/spreadsheets/d/<시트ID>/export?format=csv&gid=<models 탭 gid>
+       (시트 공유가 '링크가 있는 모든 사용자 - 뷰어' 여야 읽힙니다)  */
+  SHEET_CSV_URL: 'https://docs.google.com/spreadsheets/d/1ZZw0GRjz7ofmbzlr5h_DqS5lnOMtu8nJm8l5kh3iI2o/export?format=csv&gid=901689558',
 
   /* 2) 모델 이미지 기본 폴더 — 시트에 파일명만 적으면 이 경로 + 모델ID 폴더에서 찾습니다.
        예) assets/models/jung-eunchae/01.jpg */

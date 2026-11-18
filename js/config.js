@@ -25,11 +25,11 @@ window.SITE_CONFIG = {
   },
 
   /* 4) 필터 항목 — 버튼을 추가/삭제하려면 여기만 고치면 됩니다.
-       key 는 시트의 열 이름(gender / hair / mood)과 같아야 합니다. */
+       key 는 시트의 열 이름(gender / age_group)과 같아야 합니다.
+       ※ age 열(숫자)은 상세 페이지 AGE 표시용, age_group 열은 필터용입니다. */
   FILTERS: [
-    { key: 'gender', label: 'MODEL', options: ['MEN', 'WOMEN'] },
-    { key: 'hair', label: 'HAIR', options: ['LONG', 'MEDIUM', 'SHORT'] },
-    { key: 'mood', label: 'MOOD', options: ['CUTE', 'LIVELY', 'PURE', 'FEMININE', 'SEXY', 'CHIC', 'BOYISH'] }
+    { key: 'gender',    label: 'GENDER', options: ['FEMALE', 'MALE'] },
+    { key: 'age_group', label: 'AGE',    options: ['ADULTS', 'KIDS', 'SENIORS'] }
   ],
 
   /* 5) SHARE 팝업 — 위에서 아래 순서대로 버튼이 나열됩니다.

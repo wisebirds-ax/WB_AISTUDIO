@@ -29,10 +29,17 @@
   }
 
   const list = v => String(v || '').split(/[,|]/).map(s => s.trim()).filter(Boolean);
-  /* 성별은 한글·약어로 적어도 인식 (남/남자/M/MALE → MEN, 여/여자/F/FEMALE → WOMEN) */
-  const GENDER = { '남': 'MEN', '남자': 'MEN', '남성': 'MEN', 'M': 'MEN', 'MAN': 'MEN', 'MALE': 'MEN',
-                   '여': 'WOMEN', '여자': 'WOMEN', '여성': 'WOMEN', 'F': 'WOMEN', 'W': 'WOMEN', 'WOMAN': 'WOMEN', 'FEMALE': 'WOMEN' };
-  const upperList = v => list(v).map(s => s.toUpperCase()).map(s => GENDER[s] || s);
+  /* 필터 값은 한글·다른 표기로 적어도 인식
+     성별: 여/여자/F/WOMEN → FEMALE, 남/남자/M/MEN → MALE
+     연령: 성인/ADULT → ADULTS, 아동/어린이/키즈/KID → KIDS, 시니어/노인/SENIOR → SENIORS */
+  const ALIAS = {
+    '여': 'FEMALE', '여자': 'FEMALE', '여성': 'FEMALE', 'F': 'FEMALE', 'W': 'FEMALE', 'WOMAN': 'FEMALE', 'WOMEN': 'FEMALE',
+    '남': 'MALE', '남자': 'MALE', '남성': 'MALE', 'M': 'MALE', 'MAN': 'MALE', 'MEN': 'MALE',
+    '성인': 'ADULTS', 'ADULT': 'ADULTS',
+    '아동': 'KIDS', '어린이': 'KIDS', '키즈': 'KIDS', 'KID': 'KIDS', 'CHILD': 'KIDS', 'CHILDREN': 'KIDS',
+    '시니어': 'SENIORS', '노인': 'SENIORS', 'SENIOR': 'SENIORS'
+  };
+  const upperList = v => list(v).map(s => s.toUpperCase()).map(s => ALIAS[s] || s);
 
   function resolvePath(id, file) {
     if (!file) return '';

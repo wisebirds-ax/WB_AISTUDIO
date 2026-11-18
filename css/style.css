@@ -95,8 +95,9 @@ img { display: block; max-width: 100%; }
   min-height: 100vh; min-height: 100svh;
   padding: calc(var(--header-h) + env(safe-area-inset-top, 0px)) var(--pad-x) clamp(80px, 8vw, 200px);
 }
-.filters { display: grid; gap: clamp(4px, .35vw, 9px); margin-bottom: clamp(28px, 2.3vw, 58px); }
-.filter-row { display: grid; grid-template-columns: clamp(64px, 4.05vw, 104px) 1fr; align-items: baseline; }
+/* 라벨 칸 = 가장 긴 라벨(GENDER) 폭, 라벨과 버튼 사이 35px — 모든 줄의 버튼 시작점이 같음 */
+.filters { display: grid; grid-template-columns: max-content 1fr; column-gap: 35px; row-gap: clamp(4px, .35vw, 9px); margin-bottom: clamp(28px, 2.3vw, 58px); }
+.filter-row { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: baseline; }
 .filter-label { color: var(--c-ink); font-weight: 400; font-size: clamp(13px, .86vw, 22px); }
 .filter-options { display: flex; flex-wrap: wrap; column-gap: clamp(16px, 1.5vw, 39px); row-gap: 4px; }
 .filter-btn {
@@ -301,7 +302,6 @@ body.modal-open { overflow: hidden; }
     aspect-ratio: 9 / 16;
   }
 
-  .filter-row { grid-template-columns: 56px 1fr; }
   .contact { padding-top: calc(var(--header-h) + 40px + env(safe-area-inset-top, 0px)); }
   .field { grid-template-columns: 1fr; row-gap: 2px; }
   .field label { padding-bottom: 0; }
